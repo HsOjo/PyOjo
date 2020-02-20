@@ -1,22 +1,11 @@
 #!/usr/bin/env python
-import os
-
 import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-
-def gen_data_files(*dirs):
-    results = []
-    for src_dir in dirs:
-        for root, dirs, files in os.walk(src_dir):
-            for file in files:
-                if file[0] == '.':
-                    files.remove(file)
-            results.append((root, list(map(lambda f: root + "/" + f, files))))
-    return results
-
+with open("requirements.txt", "r") as fh:
+    requirements = fh.read().splitlines()
 
 setuptools.setup(
     name="PyOjo",
@@ -24,7 +13,7 @@ setuptools.setup(
     author="HsOjo",
     author_email="hsojo@qq.com",
     keywords='hsojo python3',
-    description='''HsOjo's Python Package.''',
+    description='''HsOjo's Private Python Package.''',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/HsOjo/PyOjo/",
@@ -36,4 +25,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    install_requires=requirements,
 )
