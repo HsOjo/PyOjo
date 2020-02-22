@@ -123,7 +123,6 @@ def battery_status():
 
         return info
     except:
-        Log.append(battery_status, 'Warning', common.get_exception())
         return None
 
 

@@ -26,7 +26,7 @@ def execute(cmd, input_str=None, timeout=None, **kwargs):
         out, err = p.communicate(input_str, timeout=timeout)
     except TimeoutExpired:
         out = ''
-        err = get_exception()
+        err = traceback.format_exc()
         p.kill()
     stat = p.returncode
 
@@ -38,15 +38,6 @@ def execute(cmd, input_str=None, timeout=None, **kwargs):
 def execute_get_out(cmd, **kwargs):
     [_, out, _] = execute(cmd, **kwargs)
     return out
-
-
-def get_exception():
-    with StringIO() as io:
-        traceback.print_exc(file=io)
-        io.seek(0)
-        content = io.read()
-
-    return content
 
 
 def reg_find_one(reg, content, default=''):
